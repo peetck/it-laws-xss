@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Form, Button, Card } from "react-bootstrap";
 
 const API_KEY = "AIzaSyACOFYf547Q740K76SfhiLgoMVq7_9ibrs";
 const DATABASE_URL = `https://xss-test-a187e.firebaseio.com/messages.json`;
@@ -51,24 +52,31 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <h1>HOME PAGE</h1>
+      <br />
+      <h2>Submit Your Message</h2>
+      <Form.Control
+        as="textarea"
+        rows={3}
+        value={msg}
+        onChange={(e) => setMsg(e.currentTarget.value)}
+      />
+      <br />
+      <Button variant="primary" block onClick={submitHandler}>
+        Submit
+      </Button>
+
+      <hr />
+
+      <h2>Message List</h2>
 
       {messages.map((item) => (
-        <div key={item.text}>
-          <p>
-            {item.by} : <span dangerouslySetInnerHTML={renderMsg(item.text)} />
-          </p>
-        </div>
+        <Card key={item.text} className="mb-4">
+          <Card.Body>
+            <span dangerouslySetInnerHTML={renderMsg(item.text)} />
+            <div class="text-right text-muted">Submitted by - {item.by}</div>
+          </Card.Body>
+        </Card>
       ))}
-
-      <div>
-        <input
-          value={msg}
-          onChange={(e) => setMsg(e.currentTarget.value)}
-        ></input>
-      </div>
-
-      <button onClick={submitHandler}>SUBMIT</button>
 
       <button onClick={props.logout}>LOGOUT</button>
     </div>
