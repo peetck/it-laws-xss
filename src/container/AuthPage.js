@@ -36,9 +36,8 @@ const AuthPage = (props) => {
 
     const data = await res.json();
 
-    if (!data.error) {
-      props.success(data.idToken, data.email);
-    }
+    if (!data.error) props.success(data.idToken, data.email);
+    else alert("Authentication Failed");
   };
 
   return (
