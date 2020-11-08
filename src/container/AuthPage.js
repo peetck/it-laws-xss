@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { Form, Button, Card, Row, Col } from "react-bootstrap";
 
-const API_KEY = "AIzaSyACOFYf547Q740K76SfhiLgoMVq7_9ibrs";
-
 const AuthPage = (props) => {
+  const { API_KEY } = props;
   const [isLogin, setIsLogin] = useState(true);
 
   const [email, setEmail] = useState("");
@@ -36,12 +35,13 @@ const AuthPage = (props) => {
 
     const data = await res.json();
 
-    if (!data.error) props.success(data.idToken, data.email);
-    else alert("Authentication Failed");
+    if (!data.error) {
+      await props.success(data.idToken);
+    } else alert("Authentication Failed");
   };
 
   return (
-    <div class="text-center">
+    <div className="text-center">
       <Row>
         <Col></Col>
         <Col>

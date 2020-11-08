@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 
 const HomePage = (props) => {
-  const { token } = props;
+  const { token, email } = props;
   const DATABASE_URL = `https://xss-test-a187e.firebaseio.com/messages.json?auth=${token}`;
   const [messages, setMessages] = useState([]);
   const [msg, setMsg] = useState("");
@@ -12,7 +12,7 @@ const HomePage = (props) => {
       method: "POST",
       body: JSON.stringify({
         msg: msg,
-        email: props.email,
+        email: email,
       }),
     });
     fetchData();
@@ -36,7 +36,7 @@ const HomePage = (props) => {
 
     setMessages(arr);
 
-    console.log(arr);
+    // console.log(arr);
   }, [DATABASE_URL]);
 
   useEffect(() => {
@@ -53,9 +53,9 @@ const HomePage = (props) => {
     <div>
       <Card>
         <Card.Header>
-          <h2 class="mb-0">Leave A Message!</h2>
+          <h2 className="mb-0">Leave A Message!</h2>
           <span className="text-muted">
-            Logged in as <b>{props.email}</b>
+            Logged in as <b>{email}</b>
           </span>
         </Card.Header>
         <Card.Body>
@@ -77,10 +77,15 @@ const HomePage = (props) => {
       <h2 className="mb-3">Message Board</h2>
 
       {messages.map((item) => (
-        <Card key={item.text} className="mb-4">
+        <Card
+          key={item.text + Math.floor(Math.random() * 1000)}
+          className="mb-4"
+        >
           <Card.Body>
             <span dangerouslySetInnerHTML={renderMsg(item.text)} />
-            <div class="text-right text-muted">Submitted by - {item.by}</div>
+            <div className="text-right text-muted">
+              Submitted by - {item.by}
+            </div>
           </Card.Body>
         </Card>
       ))}

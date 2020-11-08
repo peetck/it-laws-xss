@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import logo from "./logo.svg";
 import "./App.css";
 import { Container, Navbar } from "react-bootstrap";
 
@@ -7,27 +6,44 @@ import { Container, Navbar } from "react-bootstrap";
 import HomePage from "./container/HomePage";
 import AuthPage from "./container/AuthPage";
 
+const API_KEY = "AIzaSyACOFYf547Q740K76SfhiLgoMVq7_9ibrs";
+
 function App() {
   const [token, setToken] = useState();
-  const [localId, setLocalId] = useState();
   const [email, setEmail] = useState();
 
-  const success = (token, email) => {
+  const success = async (token) => {
     localStorage.setItem("token", token);
-    localStorage.setItem("email", email);
+    // fetch user email
+    const res = await fetch(
+      `https://identitytoolkit.googleapis.com/v1/accounts:lookup?key=${API_KEY}`,
+      {
+        method: "POST",
+        headers: {
+          "Content-type": "application/json",
+        },
+        body: JSON.stringify({
+          idToken: token,
+        }),
+      }
+    );
+
+    const user = await res.json();
+
+    setEmail(user.users[0].email);
     setToken(token);
   };
 
   const logout = () => {
     localStorage.removeItem("token");
-    localStorage.removeItem("email");
     setToken(null);
   };
 
   // try autologin
   useEffect(() => {
-    setToken(localStorage.getItem("token"));
-    setEmail(localStorage.getItem("email"));
+    if (localStorage.getItem("token")) {
+      success(localStorage.getItem("token"));
+    }
   }, []);
 
   return (
@@ -49,10 +65,10 @@ function App() {
       </Navbar>
       <Container>
         <div className="App">
-          {token !== null ? (
+          {token ? (
             <HomePage email={email} token={token} />
           ) : (
-            <AuthPage success={success} />
+            <AuthPage success={success} API_KEY={API_KEY} />
           )}
         </div>
       </Container>
