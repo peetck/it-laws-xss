@@ -34,11 +34,20 @@ function App() {
     <>
       <Navbar bg="dark" variant="dark" className="mb-4">
         <Navbar.Brand href="#home">XSS ITLAW</Navbar.Brand>
+        <Navbar.Collapse className="justify-content-end">
+          <Navbar.Text>
+            {token && (
+              <a href="#" onClick={logout}>
+                Logout
+              </a>
+            )}
+          </Navbar.Text>
+        </Navbar.Collapse>
       </Navbar>
       <Container>
         <div className="App">
           {token !== null ? (
-            <HomePage logout={logout} email={email} />
+            <HomePage email={email} />
           ) : (
             <AuthPage success={success} />
           )}

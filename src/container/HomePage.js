@@ -76,8 +76,6 @@ const HomePage = (props) => {
           </Card.Body>
         </Card>
       ))}
-
-      <button onClick={props.logout}>LOGOUT</button>
     </div>
   );
 };
