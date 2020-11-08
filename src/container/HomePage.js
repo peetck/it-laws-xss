@@ -52,21 +52,30 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <h2>Submit Your Message</h2>
-      <Form.Control
-        as="textarea"
-        rows={3}
-        value={msg}
-        onChange={(e) => setMsg(e.currentTarget.value)}
-      />
-      <br />
-      <Button variant="primary" block onClick={submitHandler}>
-        Submit
-      </Button>
+      <Card>
+        <Card.Header>
+          <h2 class="mb-0">Leave A Message!</h2>
+          <span className="text-muted">
+            Logged in as <b>{props.email}</b>
+          </span>
+        </Card.Header>
+        <Card.Body>
+          <Form.Control
+            className="mb-3"
+            as="textarea"
+            rows={3}
+            value={msg}
+            onChange={(e) => setMsg(e.currentTarget.value)}
+          />
+          <Button variant="primary" block onClick={submitHandler}>
+            Submit
+          </Button>
+        </Card.Body>
+      </Card>
 
       <hr />
 
-      <h2>Message List</h2>
+      <h2 className="mb-3">Message Board</h2>
 
       {messages.map((item) => (
         <Card key={item.text} className="mb-4">

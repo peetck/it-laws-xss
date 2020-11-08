@@ -37,9 +37,12 @@ function App() {
         <Navbar.Collapse className="justify-content-end">
           <Navbar.Text>
             {token && (
-              <a href="#" onClick={logout}>
-                Logout
-              </a>
+              <>
+                {email}&nbsp;-&nbsp;
+                <a href="#" onClick={logout}>
+                  Logout
+                </a>
+              </>
             )}
           </Navbar.Text>
         </Navbar.Collapse>

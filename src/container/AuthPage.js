@@ -43,36 +43,41 @@ const AuthPage = (props) => {
 
   return (
     <div class="text-center">
-      <h2>{isLogin ? "Login" : "Signup"}</h2>
-
       <Row>
         <Col></Col>
         <Col>
-          <Form.Label className="mt-3">E-Mail</Form.Label>
-          <Form.Control
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.currentTarget.value)}
-          />
-          <Form.Label className="mt-3">Password</Form.Label>
-          <Form.Control
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.currentTarget.value)}
-          />
-          <Button
-            variant="primary"
-            onClick={authHandler}
-            block
-            className="mt-3"
-          >
-            {isLogin ? "Login" : "Signup"}
-          </Button>
-          <br />
-          or&nbsp;
-          <a href="#" onClick={switchMode}>
-            {isLogin ? "Signup" : "Login"}
-          </a>
+          <Card>
+            <Card.Header>
+              <h2 className="m-0">{isLogin ? "Login" : "Signup"}</h2>
+            </Card.Header>
+            <Card.Body>
+              <Form.Label>E-Mail</Form.Label>
+              <Form.Control
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.currentTarget.value)}
+              />
+              <Form.Label className="mt-3">Password</Form.Label>
+              <Form.Control
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.currentTarget.value)}
+              />
+              <Button
+                variant="primary"
+                onClick={authHandler}
+                block
+                className="mt-3"
+              >
+                {isLogin ? "Login" : "Signup"}
+              </Button>
+              <br />
+              or&nbsp;
+              <a href="#" onClick={switchMode}>
+                {isLogin ? "Signup" : "Login"}
+              </a>
+            </Card.Body>
+          </Card>
         </Col>
         <Col></Col>
       </Row>
