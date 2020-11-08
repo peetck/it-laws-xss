@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import logo from "./logo.svg";
 import "./App.css";
+import { Container, Navbar } from "react-bootstrap";
 
 // import LoginPage from "./container/LoginPage";
 import HomePage from "./container/HomePage";
@@ -30,13 +31,20 @@ function App() {
   }, []);
 
   return (
-    <div className="App">
-      {token !== null ? (
-        <HomePage logout={logout} email={email} />
-      ) : (
-        <AuthPage success={success} />
-      )}
-    </div>
+    <>
+      <Navbar bg="dark" variant="dark" className="mb-4">
+        <Navbar.Brand href="#home">XSS ITLAW</Navbar.Brand>
+      </Navbar>
+      <Container>
+        <div className="App">
+          {token !== null ? (
+            <HomePage logout={logout} email={email} />
+          ) : (
+            <AuthPage success={success} />
+          )}
+        </div>
+      </Container>
+    </>
   );
 }
 

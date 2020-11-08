@@ -4,16 +4,10 @@ import "./index.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import { Container, Navbar } from "react-bootstrap";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navbar bg="dark" variant="dark" className="mb-4">
-      <Navbar.Brand href="#home">XSS ITLAW</Navbar.Brand>
-    </Navbar>
-    <Container>
-      <App />
-    </Container>
+    <App />
   </React.StrictMode>,
   document.getElementById("root")
 );
