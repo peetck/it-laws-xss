@@ -50,7 +50,7 @@ function App() {
       <Container>
         <div className="App">
           {token !== null ? (
-            <HomePage email={email} />
+            <HomePage email={email} token={token} />
           ) : (
             <AuthPage success={success} />
           )}

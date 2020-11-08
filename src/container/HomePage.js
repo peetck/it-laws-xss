@@ -1,15 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Form, Button, Card } from "react-bootstrap";
 
-const API_KEY = "AIzaSyACOFYf547Q740K76SfhiLgoMVq7_9ibrs";
-const DATABASE_URL = `https://xss-test-a187e.firebaseio.com/messages.json`;
-
 const HomePage = (props) => {
+  const { token } = props;
+  const DATABASE_URL = `https://xss-test-a187e.firebaseio.com/messages.json?auth=${token}`;
   const [messages, setMessages] = useState([]);
   const [msg, setMsg] = useState("");
 
   const submitHandler = async () => {
-    const res = await fetch(DATABASE_URL, {
+    await fetch(DATABASE_URL, {
       method: "POST",
       body: JSON.stringify({
         msg: msg,
@@ -19,7 +18,7 @@ const HomePage = (props) => {
     fetchData();
   };
 
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const res = await fetch(DATABASE_URL, {
       method: "GET",
     });
@@ -38,11 +37,11 @@ const HomePage = (props) => {
     setMessages(arr);
 
     console.log(arr);
-  };
+  }, [DATABASE_URL]);
 
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [fetchData]);
 
   const renderMsg = (text) => {
     return {
