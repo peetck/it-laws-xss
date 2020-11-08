@@ -8,7 +8,7 @@ import { Container, Navbar } from "react-bootstrap";
 
 ReactDOM.render(
   <React.StrictMode>
-    <Navbar bg="dark" variant="dark">
+    <Navbar bg="dark" variant="dark" className="mb-4">
       <Navbar.Brand href="#home">XSS ITLAW</Navbar.Brand>
     </Navbar>
     <Container>

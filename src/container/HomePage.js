@@ -52,7 +52,6 @@ const HomePage = (props) => {
 
   return (
     <div>
-      <br />
       <h2>Submit Your Message</h2>
       <Form.Control
         as="textarea"
