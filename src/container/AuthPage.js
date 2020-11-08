@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Form, Button, Card, Row, Col } from "react-bootstrap";
 
 const API_KEY = "AIzaSyACOFYf547Q740K76SfhiLgoMVq7_9ibrs";
 
@@ -41,22 +42,40 @@ const AuthPage = (props) => {
   };
 
   return (
-    <div>
-      <h1>{isLogin ? "LOGIN" : "SIGNUP"} PAGE</h1>
-      <input value={email} onChange={(e) => setEmail(e.currentTarget.value)} />
-      <br />
-      <input
-        value={password}
-        onChange={(e) => setPassword(e.currentTarget.value)}
-      />
-      <br />
+    <div class="text-center">
+      <h2>{isLogin ? "Login" : "Signup"}</h2>
 
-      <button onClick={switchMode}>
-        SWITCH TO {isLogin ? "SIGNUP" : "LOGIN"}
-      </button>
-      <br />
-
-      <button onClick={authHandler}>{isLogin ? "LOGIN" : "SIGNUP"}</button>
+      <Row>
+        <Col></Col>
+        <Col>
+          <Form.Label className="mt-3">E-Mail</Form.Label>
+          <Form.Control
+            type="email"
+            value={email}
+            onChange={(e) => setEmail(e.currentTarget.value)}
+          />
+          <Form.Label className="mt-3">Password</Form.Label>
+          <Form.Control
+            type="password"
+            value={password}
+            onChange={(e) => setPassword(e.currentTarget.value)}
+          />
+          <Button
+            variant="primary"
+            onClick={authHandler}
+            block
+            className="mt-3"
+          >
+            {isLogin ? "Login" : "Signup"}
+          </Button>
+          <br />
+          or&nbsp;
+          <a href="#" onClick={switchMode}>
+            {isLogin ? "Signup" : "Login"}
+          </a>
+        </Col>
+        <Col></Col>
+      </Row>
     </div>
   );
 };
